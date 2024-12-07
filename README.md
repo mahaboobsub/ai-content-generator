@@ -3,6 +3,7 @@
 ## Project Overview
 
 This Next.js project, powered by Clarity for user authentication and Drizzle ORM for database interactions, offers a comprehensive solution for AI-powered content generation. Users can leverage the platform to generate various types of content such as blog titles, YouTube SEO titles, Instagram posts, and more.
+![image](https://github.com/user-attachments/assets/cea2c047-7dfa-42f9-8d30-48f250253017)
 
 ## Key Features
 
@@ -12,6 +13,8 @@ This Next.js project, powered by Clarity for user authentication and Drizzle ORM
 * **Database Integration:** Efficient data management and storage using Drizzle ORM and PostgreSQL.
 * **Credits System:** A flexible credit system to manage user usage and billing.
 * **Upgrade Plans:** Customizable upgrade plans to cater to different user needs.
+
+![image](https://github.com/user-attachments/assets/9cd126df-1ea3-45dc-87fd-10e01219bd48)
 
 ## Available AI Tools
 
@@ -29,6 +32,7 @@ An AI model that generates programming code in any language, helping you automat
 
 
 ### **And More**
+![image](https://github.com/user-attachments/assets/0bc51cab-a5d9-491b-84de-c5b21417944b)
 
 
 
