@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Content Generation Platform
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+This Next.js project, powered by Clarity for user authentication and Drizzle ORM for database interactions, offers a comprehensive solution for AI-powered content generation. Users can leverage the platform to generate various types of content such as blog titles, YouTube SEO titles, Instagram posts, and more.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Key Features
+
+* **User Authentication:** Secure user authentication and authorization system using Clarity.
+* **AI Content Generation:** State-of-the-art AI models to generate diverse content types.
+* **User-Friendly Interface:** Intuitive UI built with Shadcn for a seamless user experience.
+* **Database Integration:** Efficient data management and storage using Drizzle ORM and PostgreSQL.
+* **Credits System:** A flexible credit system to manage user usage and billing.
+* **Upgrade Plans:** Customizable upgrade plans to cater to different user needs.
+
+## Available AI Tools
+
+### **Instagram Post Generator**
+📸 **Instagram Post Generator**
+An AI tool to generate creative and engaging Instagram post captions, tailored to your niche and audience.
+
+### **Blog Content Generator**  
+📄 **Blog Content**  
+An AI tool that serves as your personal blog post writer, generating engaging and viral-worthy blog content in your chosen language.
+
+### **Code Generator**
+💻 Write Code
+An AI model that generates programming code in any language, helping you automate and speed up the coding process.
+
+
+### **And More**
+
+
+
+
+## **Getting Started**
+
+### **1. Clone the Repository:**
+
+```Bash
+git clone https://github.com/your-username/ai-content-generator.git
 ```
+Use code with caution.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install Dependencies:
+```Bash
+cd ai-content-generator
+npm install
+ ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Use code with caution.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **Set Up Environment Variables:**
 
-## Learn More
+Create a .env.local file and add the following environment variables:
 
-To learn more about Next.js, take a look at the following resources:
+```Bash
+NEXT_PUBLIC_CLARITY_APP_ID=your_clarity_app_id
+NEXT_PUBLIC_CLARITY_CLIENT_ID=your_clarity_client_id
+NEXT_PUBLIC_CLARITY_REDIRECT_URI=http://localhost:3000/api/auth/callback
+DATABASE_URL=postgres://your_database_user:your_database_password@your_database_host:your_database_port/your_database_name
+```
+Use code with caution.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Start the Development Server:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```Bash
+npm run dev
+ ```
+Use code with caution.
 
-## Deploy on Vercel
+### **Deployment**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To deploy the project, you can use Vercel, Netlify, or any other Next.js compatible deployment platform. Follow the specific instructions for your chosen platform.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributing
+
+We welcome contributions to this project. Feel free to submit pull requests or report issues on the GitHub repository.
+
+### **License**
+
+This project is licensed under 1  the MIT License
+
