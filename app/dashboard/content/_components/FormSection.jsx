@@ -1,5 +1,4 @@
 "use client";
-import { TEMPLATE } from '../../_components/TemplateListSection' 
 import React, { useState } from 'react' 
 import Image from 'next/image' 
 import { Input } from '@/components/ui/input';
@@ -7,20 +6,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Loader2Icon } from 'lucide-react';
 
-interface PROPS{
-     selectedTemplate?:TEMPLATE; 
-     userFromInput:any,
-     loading:boolean
-} 
-
-function FormSection({selectedTemplate,userFromInput,loading}:PROPS) { 
-    const [formData, setFormData] = useState<any>({});
+function FormSection({selectedTemplate,userFromInput,loading}) { 
+    const [formData, setFormData] = useState({});
     
-    const handleInputChange=(event:any)=>{
+    const handleInputChange=(event)=>{
         const {name,value}=event.target;
         setFormData({...formData,[name]:value});
     }
-    const onSubmit=(e:any)=>{
+    const onSubmit=(e)=>{
         e.preventDefault();
         userFromInput(formData);
     }

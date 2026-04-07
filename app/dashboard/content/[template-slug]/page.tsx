@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import Templates from '@/app/(data)/Templates'
-import { TEMPLATE } from '../../_components/TemplateListSection'
 import FormSection from '../_components/FormSection'
 import OutputSection from '../_components/OutputSection'
 import { Button } from '@/components/ui/button'
@@ -17,30 +16,24 @@ import { TotalUsageContext } from '@/app/(context)/TotalUsageContext'
 import { useRouter } from 'next/navigation'
 
 
-interface PROPS { 
-  params: Promise<{
-    'template-slug': string;
-  }>;
-}
-
-function CreateNewContent(props:PROPS) {
-  const [params, setParams] = useState<{ 'template-slug': string } | null>(null);
+function CreateNewContent(props) {
+  const [params, setParams] = useState(null);
 
   useEffect(() => {
     props.params.then(setParams);
   }, [props.params]);
 
-  const selectedTemplate: TEMPLATE | undefined = Templates?.find(
+  const selectedTemplate = Templates?.find(
     (item) => item.slug === params?.['template-slug'] 
   );
-  const [loading,setLoading]=useState<boolean>(false);
-  const [aiOutput,setAiOutput]=useState<string>('');
+  const [loading,setLoading]=useState(false);
+  const [aiOutput,setAiOutput]=useState('');
 
   const {user}=useUser();
   const router=useRouter();
   const [totalUsage]=useContent(TotalUsageContext)
 
-  const GenerateAIContent=async(formData:any)=>{
+  const GenerateAIContent=async(formData)=>{
     if(totalUsage>=10000){
       {
         router.push('/dashboard/billing');
@@ -57,7 +50,7 @@ function CreateNewContent(props:PROPS) {
     setLoading(false);
   }
 
-  const SaveInDb=async(formData:any,slug:any,aiResp:string)=>{
+  const SaveInDb=async(formData,slug,aiResp)=>{
     const result= await db.insert(AIOutput).values({
       formData:formData,
       templateSlug:slug,
@@ -77,7 +70,7 @@ function CreateNewContent(props:PROPS) {
         {/* FormSection */}
 
         <FormSection selectedTemplate={selectedTemplate}
-        userFromInput={(v: any) =>GenerateAIContent(v)} 
+        userFromInput={(v) =>GenerateAIContent(v)} 
         loading={loading}/>
         {/* outputSection */}
         <div className='col-span-2'>
@@ -90,7 +83,7 @@ function CreateNewContent(props:PROPS) {
 
 export default CreateNewContent
 
-function useContent(TotalUsageContext: React.Context<number>): [number, React.Dispatch<React.SetStateAction<number>>] {
+function useContent(TotalUsageContext) {
   const context = React.useContext(TotalUsageContext);
   if (context === undefined) {
     throw new Error('useContent must be used within a TotalUsageProvider');
