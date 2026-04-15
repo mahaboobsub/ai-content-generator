@@ -32,6 +32,16 @@ function Header() {
         >
           Home
         </button>
+        <button 
+          className={`text-sm px-3 py-1.5 rounded-lg transition-colors ${
+            location.pathname === '/history' 
+              ? 'bg-primary text-white' 
+              : 'hover:bg-gray-100'
+          }`}
+          onClick={() => navigate('/history')}
+        >
+          History
+        </button>
         <UserButton afterSignOutUrl="/" />
       </div>
     </div>

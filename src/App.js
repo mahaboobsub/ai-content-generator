@@ -4,6 +4,7 @@ import { ClerkProvider, SignIn, SignUp, SignedIn, SignedOut, RedirectToSignIn } 
 import HomePage from './components/HomePage';
 import Dashboard from './components/Dashboard';
 import ContentGenerator from './components/ContentGenerator';
+import History from './components/History';
 import './index.css';
 
 // Clerk publishable key
@@ -38,6 +39,9 @@ function App() {
             } />
             <Route path="/dashboard" element={
               <ProtectedRoute><Dashboard /></ProtectedRoute>
+            } />
+            <Route path="/history" element={
+              <ProtectedRoute><History /></ProtectedRoute>
             } />
             <Route path="/content/:templateSlug" element={
               <ProtectedRoute><ContentGenerator /></ProtectedRoute>
