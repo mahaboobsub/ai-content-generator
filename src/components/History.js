@@ -37,6 +37,18 @@ function History() {
     return template;
   };
 
+  // Helper to remove markdown/HTML for a clean text preview
+  const getCleanPreview = (text) => {
+    if (!text) return '';
+    return text
+      .replace(/```[a-z]*\n/g, '') // Remove opening code block tags like ```json or ```html
+      .replace(/```/g, '')         // Remove closing code block tags
+      .replace(/<\/?[^>]+(>|$)/g, "") // Remove HTML tags
+      .replace(/[*#_]+(\s|$)/g, ' $1') // Remove lone *, #, _
+      .replace(/[*#_]+/g, '')      // Remove markdown bold/italics
+      .trim();
+  };
+
   return (
     <div className='bg-slate-100 min-h-screen'>
       <Header />
@@ -61,6 +73,8 @@ function History() {
 
           {historyList.map((item, index) => {
             const template = GetTemplateInfo(item.template_slug);
+            const cleanPreview = getCleanPreview(item.ai_response);
+            
             return (
               <div key={index} className='grid grid-cols-7 p-3 border-b text-sm items-center hover:bg-slate-50 transition-all'>
                 <div className='col-span-2 flex items-center gap-3 w-full pr-4'>
@@ -71,7 +85,7 @@ function History() {
                 </div>
                 
                 <div className='col-span-2 pr-4'>
-                  <p className='line-clamp-3 text-gray-600'>{item.ai_response}</p>
+                  <p className='line-clamp-3 text-gray-600' title={item.ai_response}>{cleanPreview}</p>
                 </div>
 
                 <div className='text-gray-500'>
