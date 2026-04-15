@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from 'react' 
 import Image from './Image' 
 import { Input } from './ui/input';

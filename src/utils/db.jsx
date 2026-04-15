@@ -1,8 +1,6 @@
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-import * as schema from'./schema';
+import { createClient } from '@supabase/supabase-js';
 
-const sql = neon(process.env.REACT_APP_DRIZZLE_DB_URL);
-export const db = drizzle(sql,{schema});
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
-
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

@@ -3,11 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Templates from '../data/Templates';
 import FormSection from './FormSection';
 import OutputSection from './OutputSection';
+import Header from './Header';
 import { Button } from './ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { chatSession } from '../utils/AiModal';
-import { db } from '../utils/db';
-import { AIOutput } from '../utils/schema';
+import { supabase } from '../utils/db';
 import { useUser } from '@clerk/clerk-react';
 import moment from 'moment';
 
@@ -29,28 +29,43 @@ function ContentGenerator() {
 
   const GenerateAIContent = async(formData) => {
     setLoading(true);
-    const SelectedPrompt = selectedTemplate?.aiPrompt;
-    const FinalAIPrommpt = JSON.stringify(formData) + ',' + SelectedPrompt;
-    const result = await chatSession.sendMessage(FinalAIPrommpt);
-    
-    setAiOutput(result?.response.text());
-    await SaveInDb(JSON.stringify(formData), selectedTemplate?.slug, result?.response.text());
+    try {
+      const SelectedPrompt = selectedTemplate?.aiPrompt;
+      const FinalAIPrommpt = JSON.stringify(formData) + ',' + SelectedPrompt;
+      const result = await chatSession.sendMessage(FinalAIPrommpt);
+      
+      const responseText = result?.response.text();
+      setAiOutput(responseText);
+      await SaveInDb(JSON.stringify(formData), selectedTemplate?.slug, responseText);
+    } catch (error) {
+      console.error('AI Generation Error:', error);
+      setAiOutput(`**Error:** ${error.message || 'Failed to generate content.'}`);
+    }
     setLoading(false);
   };
 
   const SaveInDb = async(formData, slug, aiResp) => {
-    const result = await db.insert(AIOutput).values({
-      formData: formData,
-      templateSlug: slug,
-      aiResponnse: aiResp,
-      createdBy: user?.primaryEmailAddress?.emailAddress || '',
-      createdAt: moment().format('DD/MM/YYYY') || '',
-    });
-    console.log(result);
+    const { data, error } = await supabase
+      .from('ai_output')
+      .insert([{
+        form_data: formData,
+        template_slug: slug,
+        ai_response: aiResp,
+        created_by: user?.primaryEmailAddress?.emailAddress || '',
+        created_at: moment().format('DD/MM/YYYY'),
+      }]);
+    
+    if (error) {
+      console.error('Error saving to Supabase:', error);
+    } else {
+      console.log('Saved to Supabase:', data);
+    }
   };
 
   return (
-    <div className='p-3'>
+    <div>
+      <Header />
+      <div className='p-3'>
       <Button onClick={() => navigate('/dashboard')}>
         <ArrowLeft/> Back 
       </Button>
@@ -66,6 +81,7 @@ function ContentGenerator() {
           <OutputSection aiOutput={aiOutput}/>
         </div>
       </div>
+    </div>
     </div>
   );
 }
